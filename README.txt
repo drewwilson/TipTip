@@ -18,3 +18,15 @@ browser window. It is completely customizable as well via CSS.
 This TipTip jQuery plug-in is dual licensed under the MIT and GPL licenses:
 http://www.opensource.org/licenses/mit-license.php
 http://www.gnu.org/licenses/gpl.html
+
+-----------------------------------------------------------
+
+Updated `enter` function so that caller event is passed along from hover, focus and click eg,
+
+		$("#selector").tipTip({
+      delay: 25,
+      enter: function(event) {
+        var selectedElem = event.target;
+        // ...
+      }
+    });
