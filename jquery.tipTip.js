@@ -5,6 +5,8 @@
  * code.drewwilson.com/entry/tiptip-jquery-plugin
  *
  * Version 1.3   -   Updated: Mar. 23, 2010
+ *               -   Updated: Apr. 3, 2012 
+ *                   https://github.com/pebblecode/TipTip
  *
  * This Plug-In will create a custom tooltip to replace the default
  * browser tooltip. It is extremely lightweight and very smart in
@@ -63,8 +65,8 @@
 				var timeout = false;
 				
 				if(opts.activation == "hover"){
-					org_elem.hover(function(){
-						active_tiptip();
+					org_elem.hover(function(event){
+						active_tiptip(event);
 					}, function(){
 						if(!opts.keepAlive){
 							deactive_tiptip();
@@ -76,14 +78,14 @@
 						});
 					}
 				} else if(opts.activation == "focus"){
-					org_elem.focus(function(){
-						active_tiptip();
+					org_elem.focus(function(event){
+						active_tiptip(event);
 					}).blur(function(){
 						deactive_tiptip();
 					});
 				} else if(opts.activation == "click"){
-					org_elem.click(function(){
-						active_tiptip();
+					org_elem.click(function(event){
+						active_tiptip(event);
 						return false;
 					}).hover(function(){},function(){
 						if(!opts.keepAlive){
@@ -97,8 +99,8 @@
 					}
 				}
 			
-				function active_tiptip(){
-					opts.enter.call(this);
+				function active_tiptip(callerEvent){
+					opts.enter.call(this, callerEvent);
 					tiptip_content.html(org_title);
 					tiptip_holder.hide().removeAttr("class").css("margin","0");
 					tiptip_arrow.removeAttr("style");
