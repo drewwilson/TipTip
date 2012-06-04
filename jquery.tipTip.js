@@ -69,6 +69,9 @@
 						if(!opts.keepAlive){
 							deactive_tiptip();
 						}
+					}).click(function (e) {
+	                    deactive_tiptip();
+	                    e.preventDefault();
 					});
 					if(opts.keepAlive){
 						tiptip_holder.hover(function(){}, function(){
