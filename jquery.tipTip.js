@@ -51,15 +51,17 @@
 		
 		return this.each(function(){
 			var org_elem = $(this);
+			var org_title = org_elem.attr(opts.attribute);
+			
 			if(opts.content){
-				var org_title = opts.content;
-			} else {
-				var org_title = org_elem.attr(opts.attribute);
+				org_title = opts.content;
 			}
+
 			if(org_title != ""){
 				if(!opts.content){
 					org_elem.removeAttr(opts.attribute); //remove original Attribute
 				}
+
 				var timeout = false;
 				
 				if(opts.activation == "hover"){
@@ -151,19 +153,23 @@
 					var bottom_compare = ((top + org_height) - (opts.edgeOffset + tip_h + 8)) < 0;
 					
 					if(top_compare || (t_class == "_bottom" && top_compare) || (t_class == "_top" && !bottom_compare)){
+						
+						t_class = t_class+"_top";
+						
 						if(t_class == "_top" || t_class == "_bottom"){
 							t_class = "_top";
-						} else {
-							t_class = t_class+"_top";
 						}
+
 						arrow_top = tip_h;
 						marg_top = Math.round(top - (tip_h + 5 + opts.edgeOffset));
 					} else if(bottom_compare | (t_class == "_top" && bottom_compare) || (t_class == "_bottom" && !top_compare)){
+
+						t_class = t_class+"_bottom";
+
 						if(t_class == "_top" || t_class == "_bottom"){
 							t_class = "_bottom";
-						} else {
-							t_class = t_class+"_bottom";
 						}
+
 						arrow_top = -12;						
 						marg_top = Math.round(top + org_height + opts.edgeOffset);
 					}
@@ -188,7 +194,7 @@
 					if (timeout){ clearTimeout(timeout); }
 					tiptip_holder.fadeOut(opts.fadeOut);
 				}
-			}				
+			}
 		});
 	}
-})(jQuery);  	
+})(jQuery);	
