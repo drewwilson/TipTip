@@ -21,6 +21,15 @@
 
 (function($){
 	$.fn.tipTip = function(options) {
+		
+		if (options === 'destroy') return this.each(function() {
+			if ((opts = $(this).data('tiptip_opts')) &&
+			    opts.deactive_tiptip &&
+			    typeof opts.deactive_tiptip === 'function')
+					opts.deactive_tiptip();
+			$(this).unbind('.tiptip').data('tiptip_opts', null);
+		});
+		
 		var defaults = { 
 			activation: "hover",
 			keepAlive: false,
@@ -63,35 +72,38 @@
 				var timeout = false;
 				
 				if(opts.activation == "hover"){
-					org_elem.hover(function(){
+					org_elem.bind('mouseenter.tiptip', function(){
 						active_tiptip();
-					}, function(){
+					}).bind('mouseleave.tiptip', function(){
 						if(!opts.keepAlive){
 							deactive_tiptip();
 						}
 					});
 					if(opts.keepAlive){
-						tiptip_holder.hover(function(){}, function(){
+						tiptip_holder.bind('mouseenter.tiptip', function(){})
+						.bind('mouseleave.tiptip', function(){
 							deactive_tiptip();
 						});
 					}
 				} else if(opts.activation == "focus"){
-					org_elem.focus(function(){
+					org_elem.bind('focus.tiptip', function(){
 						active_tiptip();
-					}).blur(function(){
+					}).bind('blur.tiptip', function(){
 						deactive_tiptip();
 					});
 				} else if(opts.activation == "click"){
-					org_elem.click(function(){
+					org_elem.bind('click.tiptip', function(){
 						active_tiptip();
 						return false;
-					}).hover(function(){},function(){
+					}).bind('mouseenter.tiptip', function(){})
+					.bind('mouseleave.tiptip', function(){
 						if(!opts.keepAlive){
 							deactive_tiptip();
 						}
 					});
 					if(opts.keepAlive){
-						tiptip_holder.hover(function(){}, function(){
+						tiptip_holder.bind('mouseenter.tiptip', function(){})
+						.bind('mouseleave.tiptip', function(){
 							deactive_tiptip();
 						});
 					}
@@ -185,6 +197,10 @@
 					if (timeout){ clearTimeout(timeout); }
 					tiptip_holder.fadeOut(opts.fadeOut);
 				}
+				
+				opts.deactive_tiptip = deactive_tiptip;
+				
+				org_elem.data('tiptip_opts', opts);
 			}				
 		});
 	}
