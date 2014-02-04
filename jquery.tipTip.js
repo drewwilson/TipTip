@@ -31,6 +31,7 @@
 			fadeIn: 200,
 			fadeOut: 200,
 			attribute: "title",
+      skipVerticalComparison: false,
 			content: false, // HTML or String to fill TipTIp with
 		  	enter: function(){},
 		  	exit: function(){}
@@ -144,9 +145,13 @@
 						marg_top = Math.round(top + h_compare);
 					}
 
-					var top_compare = (top + org_height + opts.edgeOffset + tip_h + 8) > parseInt($(window).height() + $(window).scrollTop());
-					var bottom_compare = ((top + org_height) - (opts.edgeOffset + tip_h + 8)) < 0;
-					
+          var top_compare = false;
+          var bottom_compare = false;
+          if(!opts.skipVerticalComparison) {
+					  top_compare = (top + org_height + opts.edgeOffset + tip_h + 8) > parseInt($(window).height() + $(window).scrollTop());
+					  bottom_compare = ((top + org_height) - (opts.edgeOffset + tip_h + 8)) < 0;
+          }
+
 					if(top_compare || (t_class == "_bottom" && top_compare) || (t_class == "_top" && !bottom_compare)){
 						if(t_class == "_top" || t_class == "_bottom"){
 							t_class = "_top";
