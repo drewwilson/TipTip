@@ -4,7 +4,7 @@
  * www.drewwilson.com
  * code.drewwilson.com/entry/tiptip-jquery-plugin
  *
- * Version 1.3   -   Updated: Mar. 23, 2010
+ * Version 1.4   -   Updated: Mar. 26, 2015
  *
  * This Plug-In will create a custom tooltip to replace the default
  * browser tooltip. It is extremely lightweight and very smart in
@@ -103,8 +103,8 @@
 					tiptip_holder.hide().removeAttr("class").css("margin","0");
 					tiptip_arrow.removeAttr("style");
 					
-					var top = parseInt(org_elem.offset()['top']);
-					var left = parseInt(org_elem.offset()['left']);
+					var top = parseInt(org_elem.position()['top']);
+					var left = parseInt(org_elem.position()['left']);
 					var org_width = parseInt(org_elem.outerWidth());
 					var org_height = parseInt(org_elem.outerHeight());
 					var tip_w = tiptip_holder.outerWidth();
