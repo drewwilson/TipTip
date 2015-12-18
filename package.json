@@ -1,0 +1,22 @@
+{
+  "name": "jquery.tipTip",
+  "version": "1.3.0",
+  "description": "This Plug-In will create a custom tooltip to replace the default browser tooltip. It is extremely lightweight and very smart in that it detects the edges of the browser window and will make sure the tooltip stays within the current window size. As a result the tooltip will adjust itself to be displayed above, below, to the left or to the right depending on what is necessary to stay within the browser window. It is completely customizable as well via CSS.",
+  "main": "jquery.tipTip.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drewwilson/TipTip.git"
+  },
+  "bugs": {
+    "url": "https://github.com/drewwilson/TipTip/issues"
+  },
+  "author": {
+    "name": "Drew Wilson"
+  },
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "Drew Wilson"
+    }
+  ]
+}
